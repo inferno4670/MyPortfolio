@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Code, Database, Zap, Globe, ChevronDown, Send, ExternalLink, Cpu, Shield, Sparkles, Linkedin } from 'lucide-react';
-import profilePhoto from '@assets/cropped-thumb-1920-201487 (1).jpg';
+import myImg from "../assets/(1).jpg";
 
 export default function Portfolio() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
