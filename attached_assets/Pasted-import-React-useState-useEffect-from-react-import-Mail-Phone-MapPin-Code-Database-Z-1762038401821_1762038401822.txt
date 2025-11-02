@@ -1,0 +1,382 @@
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Code, Database, Zap, Globe, ChevronDown, Github, Linkedin, Send } from 'lucide-react';
+
+const Portfolio = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [activeSection, setActiveSection] = useState('home');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const skills = {
+    languages: ['Python', 'C', 'HTML', 'CSS', 'JavaScript'],
+    tools: ['Power BI', 'MS Office', 'Excel', 'Git', 'VS Code'],
+    spoken: ['English', 'Hindi', 'Marathi', 'Urdu', 'Turkish']
+  };
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="relative min-h-screen bg-black text-white overflow-hidden">
+      {/* Custom Cursor Glow */}
+      <div 
+        className="fixed w-96 h-96 rounded-full pointer-events-none z-50 mix-blend-screen"
+        style={{
+          background: 'radial-gradient(circle, rgba(251,146,60,0.15) 0%, transparent 70%)',
+          left: mousePosition.x - 192,
+          top: mousePosition.y - 192,
+          transition: 'all 0.1s ease'
+        }}
+      />
+
+      {/* Background Animation */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div className="absolute top-1/3 -right-48 w-96 h-96 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-amber-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
+      </div>
+
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-40 backdrop-blur-md bg-black/30 border-b border-orange-500/20">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            Rehan
+          </h1>
+          <div className="flex gap-8">
+            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className="hover:text-orange-400 transition-colors duration-300 relative group"
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 group-hover:w-full transition-all duration-300" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className="max-w-7xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6 animate-fadeIn">
+            <p className="text-purple-400 text-lg font-medium">Do You Know Me?</p>
+            <h2 className="text-6xl md:text-7xl font-bold leading-tight">
+              <span className="inline-block animate-wave">👋</span> I'm Rehan<br />
+              <span className="bg-gradient-to-r from-orange-400 via-red-500 to-amber-400 bg-clip-text text-transparent">
+                Aslam Khan
+              </span>
+            </h2>
+            <p className="text-xl text-gray-300 leading-relaxed">
+              Electrical & Computer Engineering Student<br />
+              Web Developer | Data Enthusiast | Quick Learner
+            </p>
+            <p className="text-gray-400 max-w-xl">
+              Passionate about pushing boundaries in the digital workspace. I thrive on challenging projects that help me grow while delivering exceptional results.
+            </p>
+            <div className="flex gap-4 pt-4">
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="px-8 py-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-full hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105"
+              >
+                View Projects
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="px-8 py-3 border-2 border-orange-500 rounded-full hover:bg-orange-500/10 transition-all duration-300"
+              >
+                Contact Me
+              </button>
+            </div>
+          </div>
+          
+          <div className="relative flex justify-center items-center">
+            <div className="absolute w-96 h-96 border-2 border-dashed border-orange-500/30 rounded-full animate-spin-slow" />
+            <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-orange-500/50 shadow-2xl shadow-orange-500/30">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20" />
+              <div className="w-full h-full bg-gray-800 flex items-center justify-center text-6xl">
+                👤
+              </div>
+            </div>
+            
+            {/* Floating Icons */}
+            <div className="absolute top-10 right-10 w-16 h-16 bg-white rounded-full flex items-center justify-center animate-float shadow-lg">
+              <Code className="text-red-500" size={32} />
+            </div>
+            <div className="absolute bottom-20 right-0 w-16 h-16 bg-white rounded-full flex items-center justify-center animate-float shadow-lg" style={{ animationDelay: '0.5s' }}>
+              <Database className="text-purple-500" size={32} />
+            </div>
+            <div className="absolute top-1/2 left-0 w-16 h-16 bg-white rounded-full flex items-center justify-center animate-float shadow-lg" style={{ animationDelay: '1s' }}>
+              <Zap className="text-blue-500" size={32} />
+            </div>
+            <div className="absolute bottom-10 left-10 w-16 h-16 bg-white rounded-full flex items-center justify-center animate-float shadow-lg" style={{ animationDelay: '1.5s' }}>
+              <Globe className="text-orange-500" size={32} />
+            </div>
+          </div>
+        </div>
+        
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <ChevronDown className="text-orange-400" size={32} />
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="relative py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            About Me
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
+              <MapPin className="text-orange-400 mb-4" size={32} />
+              <h3 className="text-2xl font-bold mb-2">Location</h3>
+              <p className="text-gray-300">Mumbai, Maharashtra, India</p>
+            </div>
+            <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
+              <Code className="text-orange-400 mb-4" size={32} />
+              <h3 className="text-2xl font-bold mb-2">Education</h3>
+              <p className="text-gray-300">B.E. Electrical & Computer Engineering</p>
+              <p className="text-gray-400 text-sm">Anjuman Islam's Kalsekar Technical Campus</p>
+              <p className="text-orange-400 font-semibold mt-2">Expected: 2028</p>
+            </div>
+          </div>
+          <div className="mt-8 backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold mb-4">My Journey</h3>
+            <p className="text-gray-300 leading-relaxed">
+              I'm a goal-driven engineering student with a passion for technology and continuous learning. 
+              My objective is to work in challenging, growth-focused roles that push me beyond my comfort zone 
+              while gaining valuable experience in the online remote workspace. With strong attention to detail 
+              and multilingual communication skills, I'm committed to delivering reliable and consistent results.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="relative py-32 px-6 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            Skills & Expertise
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
+              <h3 className="text-2xl font-bold mb-6 text-orange-400">Programming</h3>
+              <div className="space-y-3">
+                {skills.languages.map((skill) => (
+                  <div key={skill} className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full" />
+                    <span className="text-gray-300">{skill}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
+              <h3 className="text-2xl font-bold mb-6 text-orange-400">Tools & Software</h3>
+              <div className="space-y-3">
+                {skills.tools.map((tool) => (
+                  <div key={tool} className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full" />
+                    <span className="text-gray-300">{tool}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20">
+              <h3 className="text-2xl font-bold mb-6 text-orange-400">Languages</h3>
+              <div className="space-y-3">
+                {skills.spoken.map((lang) => (
+                  <div key={lang} className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full" />
+                    <span className="text-gray-300">{lang}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold mb-6 text-center text-orange-400">Core Strengths</h3>
+            <div className="grid md:grid-cols-4 gap-6 text-center">
+              <div className="p-4">
+                <Zap className="text-orange-400 mx-auto mb-2" size={32} />
+                <p className="text-gray-300">Quick Learner</p>
+              </div>
+              <div className="p-4">
+                <Code className="text-orange-400 mx-auto mb-2" size={32} />
+                <p className="text-gray-300">Detail-Oriented</p>
+              </div>
+              <div className="p-4">
+                <Globe className="text-orange-400 mx-auto mb-2" size={32} />
+                <p className="text-gray-300">Multilingual</p>
+              </div>
+              <div className="p-4">
+                <Database className="text-orange-400 mx-auto mb-2" size={32} />
+                <p className="text-gray-300">Goal-Driven</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="relative py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            Featured Projects
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 group">
+                <div className="h-48 bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                  <Code className="text-orange-400" size={64} />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">Project {i}</h3>
+                  <p className="text-gray-400 mb-4">Coming soon - exciting project in development</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">React</span>
+                    <span className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Python</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative py-32 px-6 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            Get In Touch
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <a href="mailto:salamalaykumrehan46@gmail.com" className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group">
+              <Mail className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
+              <p className="text-sm text-gray-400 mb-1">Email</p>
+              <p className="text-gray-300 break-all">salamalaykumrehan46@gmail.com</p>
+            </a>
+            
+            <a href="tel:+919987840762" className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group">
+              <Phone className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
+              <p className="text-sm text-gray-400 mb-1">Phone</p>
+              <p className="text-gray-300">+91 99878 40762</p>
+            </a>
+            
+            <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group">
+              <MapPin className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
+              <p className="text-sm text-gray-400 mb-1">Location</p>
+              <p className="text-gray-300">Mumbai, Maharashtra, India</p>
+            </div>
+          </div>
+
+          <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold mb-6 text-center">Send a Message</h3>
+            <div className="space-y-6">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full bg-black/50 border border-orange-500/30 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-500 transition-colors"
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full bg-black/50 border border-orange-500/30 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-500 transition-colors"
+                />
+              </div>
+              <div>
+                <textarea
+                  placeholder="Your Message"
+                  rows={5}
+                  className="w-full bg-black/50 border border-orange-500/30 rounded-lg px-4 py-3 focus:outline-none focus:border-orange-500 transition-colors resize-none"
+                />
+              </div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert('Message sent! (This is a demo - integrate with a backend service for real functionality)');
+                }}
+                className="w-full px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 font-semibold"
+              >
+                Send Message <Send size={20} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative py-8 px-6 border-t border-orange-500/20">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gray-400">
+            © 2025 Rehan Aslam Khan | Designed with <span className="text-red-500">❤️</span> in Mumbai
+          </p>
+        </div>
+      </footer>
+
+      <style jsx>{`
+        @keyframes wave {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(20deg); }
+          75% { transform: rotate(-20deg); }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-wave {
+          animation: wave 2s ease-in-out infinite;
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default Portfolio;
