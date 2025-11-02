@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Code, Database, Zap, Globe, ChevronDown, Send, ExternalLink, Cpu, Shield, Sparkles, Linkedin } from 'lucide-react';
-import myImg from "../assets/(1).jpg";
+import profilePhoto from "../assets/profile.jpg";
+
 
 export default function Portfolio() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -418,7 +419,7 @@ export default function Portfolio() {
       <footer className="relative py-8 px-6 border-t border-orange-500/20">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-400" data-testid="text-footer">
-            © 2025 Rehan Aslam Khan | Designed with <span className="text-red-500">❤️</span> in Mumbai
+            © 2025 Rehan Aslam Khan | Designed By Me <span className="text-red-500">😘</span> with Love
           </p>
         </div>
       </footer>
