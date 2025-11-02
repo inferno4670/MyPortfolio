@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Code, Database, Zap, Globe, ChevronDown, Send, ExternalLink, Cpu, Shield, Sparkles, Linkedin } from 'lucide-react';
-import profilePhoto from '@assets/cropped-WhatsApp Image 2025-11-02 at 02.33.29_05ffe0f4_1762040038360.jpg';
+import profilePhoto from '@assets/cropped-thumb-1920-201487 (1).jpg';
 
 export default function Portfolio() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
