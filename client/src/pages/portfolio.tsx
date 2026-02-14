@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, Phone, MapPin, Code, Database, Zap, Globe, ChevronDown, Send, ExternalLink, Cpu, Shield, Sparkles, Linkedin } from 'lucide-react';
 import profilePhoto from "../assets/profile.jpg";
 
@@ -75,16 +76,45 @@ export default function Portfolio() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Message sent! (This is a demo - integrate with a backend service for real functionality)');
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      // 1. Send via backend API (for storage/logs)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // 2. Send via EmailJS (for user notification)
+      const emailResult = await emailjs.send(
+        'service_3agc7fn',  // Service ID
+        'template_645wcof', // Template ID
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+        },
+        'pCLrhCLbcoKPLnDQ5' // Public Key
+      );
+
+      if (response.ok || emailResult.status === 200) {
+        alert('Message sent successfully! Thank you for reaching out.');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        alert('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('An error occurred while sending your message. Please try again later.');
+    }
   };
 
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
-      <div 
+      <div
         className="fixed w-96 h-96 rounded-full pointer-events-none z-50 mix-blend-screen"
         style={{
           background: 'radial-gradient(circle, rgba(251,146,60,0.15) 0%, transparent 70%)',
@@ -155,17 +185,17 @@ export default function Portfolio() {
               </button>
             </div>
           </div>
-          
+
           <div className="relative flex justify-center items-center">
             <div className="absolute w-96 h-96 border-2 border-dashed border-orange-500/30 rounded-full animate-spin-slow" />
             <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-orange-500/50 shadow-2xl shadow-orange-500/30 bg-black" data-testid="img-profile">
-              <img 
-                src={profilePhoto} 
-                alt="Rehan Aslam Khan" 
+              <img
+                src={profilePhoto}
+                alt="Rehan Aslam Khan"
                 className="w-full h-full object-cover object-center"
               />
             </div>
-            
+
             <div className="absolute top-10 right-10 w-16 h-16 bg-white rounded-full flex items-center justify-center animate-float shadow-lg">
               <Code className="text-red-500" size={32} />
             </div>
@@ -180,7 +210,7 @@ export default function Portfolio() {
             </div>
           </div>
         </div>
-        
+
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ChevronDown className="text-orange-400" size={32} />
         </div>
@@ -208,9 +238,9 @@ export default function Portfolio() {
           <div className="mt-8 backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8" data-testid="card-journey">
             <h3 className="text-2xl font-bold mb-4">My Journey</h3>
             <p className="text-gray-300 leading-relaxed">
-              I'm a goal-driven engineering student with a passion for technology and continuous learning. 
-              My objective is to work in challenging, growth-focused roles that push me beyond my comfort zone 
-              while gaining valuable experience in the online remote workspace. With strong attention to detail 
+              I'm a goal-driven engineering student with a passion for technology and continuous learning.
+              My objective is to work in challenging, growth-focused roles that push me beyond my comfort zone
+              while gaining valuable experience in the online remote workspace. With strong attention to detail
               and multilingual communication skills, I'm committed to delivering reliable and consistent results.
             </p>
           </div>
@@ -222,7 +252,7 @@ export default function Portfolio() {
           <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent" data-testid="text-heading-skills">
             Skills & Expertise
           </h2>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20" data-testid="card-programming">
               <h3 className="text-2xl font-bold mb-6 text-orange-400">Programming</h3>
@@ -290,7 +320,7 @@ export default function Portfolio() {
           <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent" data-testid="text-heading-projects">
             Featured Projects
           </h2>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {projects.map((project, index) => {
               const Icon = project.icon;
@@ -324,7 +354,7 @@ export default function Portfolio() {
               );
             })}
           </div>
-          
+
           <div className="text-center mt-12">
             <a
               href="https://github.com/inferno4670"
@@ -344,26 +374,26 @@ export default function Portfolio() {
           <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent" data-testid="text-heading-contact">
             Get In Touch
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <a href="mailto:salamalaykumrehan46@gmail.com" className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group" data-testid="link-email">
               <Mail className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
               <p className="text-sm text-gray-400 mb-1">Email</p>
               <p className="text-gray-300 break-all text-sm">salamalaykumrehan46@gmail.com</p>
             </a>
-            
+
             <a href="tel:+919987840762" className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group" data-testid="link-phone">
               <Phone className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
               <p className="text-sm text-gray-400 mb-1">Phone</p>
               <p className="text-gray-300">+91 99878 40762</p>
             </a>
-            
+
             <a href="https://www.linkedin.com/in/rehan-khan-a19487387/" target="_blank" rel="noopener noreferrer" className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group" data-testid="link-linkedin">
               <Linkedin className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
               <p className="text-sm text-gray-400 mb-1">LinkedIn</p>
               <p className="text-gray-300">Connect with me</p>
             </a>
-            
+
             <div className="backdrop-blur-md bg-white/5 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 text-center group" data-testid="card-contact-location">
               <MapPin className="text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" size={32} />
               <p className="text-sm text-gray-400 mb-1">Location</p>
