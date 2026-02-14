@@ -22,11 +22,11 @@ export default function Portfolio() {
 
   const projects = [
     {
-      name: 'InfernoCoded',
-      description: 'A free, browser-first AI code editor powered by WebLLM. Zero API cost, privacy-first development environment.',
+      name: 'Student Management System',
+      description: 'A modern, full-stack Student Academic Management System built for efficient academic record keeping and retrieval.',
       icon: Sparkles,
       tech: ['TypeScript', 'WebLLM', 'AI'],
-      url: 'https://github.com/inferno4670/InfernoCoded',
+      url: 'https://github.com/inferno4670/student-management-system',
       gradient: 'from-purple-500/20 to-pink-500/20'
     },
     {
@@ -54,12 +54,12 @@ export default function Portfolio() {
       gradient: 'from-orange-500/20 to-red-500/20'
     },
     {
-      name: 'Campus Connect',
-      description: 'Platform connecting students across campus for collaboration, events, and community building.',
-      icon: Globe,
-      tech: ['TypeScript', 'React', 'Web'],
-      url: 'https://github.com/inferno4670/Campus-Connect',
-      gradient: 'from-indigo-500/20 to-purple-500/20'
+      name: 'InfernoCoded',
+      description: 'A free, browser-first AI code editor powered by WebLLM. Zero API cost, privacy-first development environment.',
+      icon: Sparkles,
+      tech: ['TypeScript', 'WebLLM', 'AI'],
+      url: 'https://github.com/inferno4670/InfernoCoded',
+      gradient: 'from-purple-500/20 to-pink-500/20'
     },
     {
       name: 'Hostel Bros',
