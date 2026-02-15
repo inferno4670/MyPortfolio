@@ -54,11 +54,11 @@ export default function Portfolio() {
       gradient: 'from-orange-500/20 to-red-500/20'
     },
     {
-      name: 'InfernoCoded',
-      description: 'A free, browser-first AI code editor powered by WebLLM. Zero API cost, privacy-first development environment.',
+      name: 'Future Life Simulator',
+      description: 'A future-focused career and life simulation tool that predicts roles based on current trends and user input.',
       icon: Sparkles,
-      tech: ['TypeScript', 'WebLLM', 'AI'],
-      url: 'https://github.com/inferno4670/InfernoCoded',
+      tech: ['TypeScript', 'AI', 'Simulation'],
+      url: 'https://github.com/inferno4670/Future-Life-Simulator',
       gradient: 'from-purple-500/20 to-pink-500/20'
     },
     {
@@ -68,6 +68,17 @@ export default function Portfolio() {
       tech: ['TypeScript', 'Community', 'Social'],
       url: 'https://github.com/inferno4670/Hostel-Bros',
       gradient: 'from-yellow-500/20 to-orange-500/20'
+    }
+  ];
+
+  const deployedProjects = [
+    {
+      name: 'Future Life Simulator',
+      description: 'Experience the future career predictor live. Get insights into your career path based on global trends.',
+      icon: ExternalLink,
+      tech: ['Vercel', 'Live Demo'],
+      url: 'https://iwannapeep.vercel.app',
+      gradient: 'from-blue-600/20 to-purple-600/20'
     }
   ];
 
@@ -136,7 +147,7 @@ export default function Portfolio() {
             Rehan
           </h1>
           <div className="flex gap-8">
-            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
+            {['Home', 'About', 'Skills', 'Projects', 'Deployed', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -365,6 +376,48 @@ export default function Portfolio() {
             >
               View All Projects on GitHub <ExternalLink size={20} />
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="deployed" className="relative py-32 px-6 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent" data-testid="text-heading-deployed">
+            Deployed Projects
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8 justify-center">
+            {deployedProjects.map((project, index) => {
+              const Icon = project.icon;
+              return (
+                <a
+                  key={project.name}
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="backdrop-blur-md bg-white/5 border border-purple-500/20 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 group cursor-pointer"
+                  data-testid={`card-deployed-${index + 1}`}
+                >
+                  <div className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center group-hover:scale-105 transition-transform duration-300 relative`}>
+                    <Icon className="text-purple-400" size={64} />
+                    <ExternalLink className="absolute top-4 right-4 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" size={20} />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 flex items-center gap-2 text-white group-hover:text-purple-400 transition-colors">
+                      {project.name}
+                    </h3>
+                    <p className="text-gray-400 mb-4 text-sm leading-relaxed">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span key={tech} className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
