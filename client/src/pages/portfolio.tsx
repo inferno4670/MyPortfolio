@@ -46,12 +46,12 @@ export default function Portfolio() {
       gradient: 'from-green-500/20 to-emerald-500/20'
     },
     {
-      name: 'SlotSwapper',
-      description: 'Peer-to-peer time-slot scheduling application. Users can mark busy slots as swappable for flexible scheduling.',
-      icon: Code,
-      tech: ['TypeScript', 'P2P', 'Scheduling'],
-      url: 'https://github.com/inferno4670/SlotSwapper',
-      gradient: 'from-orange-500/20 to-red-500/20'
+      name: 'College Survival Intelligence System (CSIS)',
+      description: 'A comprehensive intelligence system for college students to track attendance, calculate internal marks, and predict passing probabilities.',
+      icon: ExternalLink,
+      tech: ['Next.js', 'Supabase', 'Vercel'],
+      url: 'https://github.com/inferno4670/College-Survival-System',
+      gradient: 'from-orange-500/20 to-pink-500/20'
     },
     {
       name: 'Future Life Simulator',
@@ -79,6 +79,14 @@ export default function Portfolio() {
       tech: ['Vercel', 'Live Demo'],
       url: 'https://iwannapeep.vercel.app',
       gradient: 'from-blue-600/20 to-purple-600/20'
+    },
+    {
+      name: 'College Survival Intelligence System (CSIS)',
+      description: 'A comprehensive intelligence system for college students to track attendance, calculate internal marks, and predict passing probabilities.',
+      icon: ExternalLink,
+      tech: ['Next.js', 'Supabase', 'Vercel'],
+      url: 'https://college-survival-system.vercel.app/',
+      gradient: 'from-emerald-600/20 to-teal-600/20'
     }
   ];
 
